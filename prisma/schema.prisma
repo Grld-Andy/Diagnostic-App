@@ -19,7 +19,7 @@ model DiagnosticTest {
   id          Int      @id @default(autoincrement())
   patientName String   @db.VarChar(255)
   testType    String   @db.VarChar(255)
-  result      Boolean  @db.Boolean()
+  result      String   @db.Text
   testDate    DateTime @db.Date()
   notes       String   @db.Text
 }

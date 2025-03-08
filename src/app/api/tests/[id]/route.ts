@@ -1,12 +1,15 @@
 import prisma from "../../../../../prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
-  const id = request.nextUrl.searchParams.get("id");
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const id = params.id;
   if (!id) {
     return NextResponse.json({ error: "ID is required" }, { status: 400 });
   }
-  const diagnosis = await prisma.diagnosticTest.findFirst({
+  const diagnosis = await prisma.diagnosticTest.findUnique({
     where: { id: Number(id) },
   });
   return NextResponse.json(
@@ -15,8 +18,11 @@ export async function GET(request: NextRequest) {
   );
 }
 
-export async function PUT(request: NextRequest) {
-  const id = request.nextUrl.searchParams.get("id");
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const id = params.id;
   if (!id) {
     return NextResponse.json({ error: "ID is required" }, { status: 400 });
   }
@@ -37,13 +43,16 @@ export async function PUT(request: NextRequest) {
   );
 }
 
-export async function DELETE(request: NextRequest) {
-  const id = request.nextUrl.searchParams.get("id");
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const id = params.id;
   if (!id) {
     return NextResponse.json({ error: "ID is required" }, { status: 400 });
   }
   await prisma.diagnosticTest.delete({
     where: { id: Number(id) },
   });
-  return NextResponse.json({ message: "success" }, { status: 204 });
+  return NextResponse.json(null, { status: 204 });
 }
