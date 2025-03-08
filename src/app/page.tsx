@@ -38,7 +38,7 @@ export default function Home() {
               <h1>Tests List</h1>
               <RiFileList3Line size={18} />
             </div>
-            <Link href="/pages/tests/new">
+            <Link href="/new">
               <button className="bg-blue-700 px-3 py-2 cursor-pointer hover:bg-blue-500 active:shadow-md transition-colors text-white font-semibold rounded-md">
                 Add Test
               </button>
