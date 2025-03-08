@@ -6,6 +6,8 @@ import { Test } from "./models/TestModel";
 import { RiFileList3Line } from "react-icons/ri";
 import TestTable from "./components/TestTable";
 import Spinner from "./components/Spinner";
+import Link from "next/link";
+import Card from "@/app/components/Card";
 
 export default function Home() {
   const [tests, setTests] = useState<Array<Test>>([]);
@@ -30,18 +32,22 @@ export default function Home() {
   return (
     <>
       {tests.length > 0 ? (
-        <div className="bg-white p-5 border border-black/50 rounded-md">
-          <div>
-            <div className="text-2xl flex items-center mb-5 gap-2">
+        <Card>
+          <div className="flex justify-between mb-5">
+            <div className="text-2xl flex items-center gap-2">
               <h1>Tests List</h1>
               <RiFileList3Line size={18} />
             </div>
-            <button className="bg-blue-700 text-white font-semibold rounded-md">Add Test</button>
+            <Link href="/pages/tests/new">
+              <button className="bg-blue-700 px-3 py-2 cursor-pointer hover:bg-blue-500 active:shadow-md transition-colors text-white font-semibold rounded-md">
+                Add Test
+              </button>
+            </Link>
           </div>
           <TestTable tests={tests} />
-        </div>
+        </Card>
       ) : isLoading ? (
-        <div className='w-full flex justify-center items-center'>
+        <div className="w-full flex justify-center items-center">
           <Spinner />
         </div>
       ) : (
