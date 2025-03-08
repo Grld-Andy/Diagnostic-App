@@ -10,7 +10,10 @@ const TestTable: React.FC<Props> = ({ tests }) => {
   return (
     <div>
       <div className="w-full border-1 border-black/50 rounded-md overflow-hidden">
-        <div className="grid grid-cols-6 text-gray-700 font-semibold border-b border-black/50 bg-[#f2f4f5]">
+        <div className="grid grid-cols-[40px_repeat(5,1fr)_90px] text-gray-700 font-semibold border-b border-black/50 bg-[#f2f4f5]">
+          <div className="col-span-1 flex p-3">
+            <p>ID</p>
+          </div>
           <div className="col-span-1 flex p-3">
             <p>Patient Name</p>
           </div>

@@ -31,14 +31,19 @@ export default function Home() {
     <>
       {tests.length > 0 ? (
         <div className="bg-white p-5 border border-black/50 rounded-md">
-          <div className="text-2xl flex items-center mb-5 gap-2">
-            <h1>Tests List</h1>
-            <RiFileList3Line size={18} />
+          <div>
+            <div className="text-2xl flex items-center mb-5 gap-2">
+              <h1>Tests List</h1>
+              <RiFileList3Line size={18} />
+            </div>
+            <button className="bg-blue-700 text-white font-semibold rounded-md">Add Test</button>
           </div>
           <TestTable tests={tests} />
         </div>
       ) : isLoading ? (
-        <Spinner />
+        <div className='w-full flex justify-center items-center'>
+          <Spinner />
+        </div>
       ) : (
         <h1 className="text-[20px] font-medium text-gray-700">No test found</h1>
       )}

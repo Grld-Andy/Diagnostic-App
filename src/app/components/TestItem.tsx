@@ -9,8 +9,9 @@ interface Props {
 const TestItem: React.FC<Props> = ({ test }) => {
   return (
     <div
-      className={`grid grid-cols-6 pr-1 items-center transition-colors duration-200`}
+      className={`grid grid-cols-[40px_repeat(5,1fr)_90px] pr-1 items-center transition-colors duration-200`}
     >
+      <div className="col-span-1 p-2 flex it">{test.id}</div>
       <div className="col-span-1 p-2">{test.patientName}</div>
       <div className="col-span-1 p-2">{test.testType}</div>
       <div className="col-span-1 p-2">{test.result}</div>
@@ -18,12 +19,12 @@ const TestItem: React.FC<Props> = ({ test }) => {
         {new Date(test.testDate).toDateString()}
       </div>
       <div className="col-span-1 p-2">{test.notes}</div>
-      <div className="col-span-1 p-2 flex flex-col gap-2">
-        <button className="px-1 py-2 rounded-md bg-yellow-500">
-          <MdModeEditOutline />
+      <div className="col-span-1 p-2 flex justify-center gap-2 text-white">
+        <button className="px-2 py-2 rounded-md bg-yellow-500">
+          <MdModeEditOutline size={20} />
         </button>
-        <button className="px-1 py-2 rounded-md bg-red-500">
-          <MdDeleteForever />
+        <button className="px-2 py-2 rounded-md bg-red-500">
+          <MdDeleteForever size={20} />
         </button>
       </div>
     </div>
