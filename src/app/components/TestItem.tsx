@@ -14,7 +14,8 @@ const TestItem: React.FC<Props> = ({ test }) => {
     try {
       await axios.delete(`/api/tests/${id}`);
     } catch (err) {
-      console.error("There was an error deleting data");
+      console.error(err);
+      setError("There was an error deleting data");
     }
   };
 

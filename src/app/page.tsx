@@ -44,7 +44,7 @@ export default function Home() {
               </button>
             </Link>
           </div>
-          <TestTable tests={tests} />
+          <TestTable tests={tests}/>
         </Card>
       ) : isLoading ? (
         <div className="w-full flex justify-center items-center">

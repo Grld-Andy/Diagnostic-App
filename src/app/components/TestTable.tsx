@@ -7,6 +7,7 @@ interface Props {
 }
 
 const TestTable: React.FC<Props> = ({ tests }) => {
+
   return (
     <div>
       <div className="w-full border-1 border-black/50 rounded-md overflow-hidden">
