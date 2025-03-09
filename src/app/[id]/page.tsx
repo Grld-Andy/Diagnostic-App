@@ -7,12 +7,15 @@ import { useRouter } from "next/router";
 import Spinner from "../components/Spinner";
 import TestDetails from "../components/TestDetails";
 import Link from "next/link";
+import { Callout } from "@radix-ui/themes";
 
 const page = () => {
   const [test, setTest] = useState<Test | null>(null);
   const router = useRouter();
-  const { id } = router.query;
+  let { id } = router.query;
+  id = Array.isArray(id) ? id[0] : id || "";
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,19 +28,46 @@ const page = () => {
     fetchData();
   }, []);
 
+  const handleDelete = async (id: string) => {
+    try {
+      await axios.delete(`/api/tests/${id}`);
+      router.push("/");
+    } catch (err) {
+      console.error(err);
+      setError("There was an error deleting data");
+    }
+  };
+
+  if (!id) {
+    return <h1>Page not found</h1>;
+  }
+
   return (
     <Card>
+      {error && (
+        <Callout.Root color="red" className="mb-5">
+          <Callout.Text>{error}</Callout.Text>
+        </Callout.Root>
+      )}
       <div className="flex justify-between mb-5">
         <div className="text-2xl flex items-center gap-2">
-          <h1>Tests List</h1>
+          <h1>Test #{id}</h1>
           <RiFileList3Line size={18} />
         </div>
         <div>
           <Link href="/new">
-            <button className="bg-blue-700 px-3 py-2 cursor-pointer hover:bg-blue-500 active:shadow-md transition-colors text-white font-semibold rounded-md">
-              Edit Test
+            <button className="bg-yellow-700 px-3 py-2 cursor-pointer hover:bg-yellow-500 active:shadow-md transition-colors text-white font-semibold rounded-md">
+              Edit
             </button>
           </Link>
+          <button
+            onClick={() => {
+              handleDelete(id);
+            }}
+            className="bg-red-700 px-3 py-2 cursor-pointer hover:bg-red-500 active:shadow-md transition-colors text-white font-semibold rounded-md"
+          >
+            Delete
+          </button>
         </div>
       </div>
 

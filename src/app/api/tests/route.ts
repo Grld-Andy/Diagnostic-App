@@ -1,4 +1,4 @@
-import { createTestSchema } from "@/app/validators/testValidationSchema";
+import { createTestSchema } from "@/validators/testValidationSchema";
 import prisma from "../../../../prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
