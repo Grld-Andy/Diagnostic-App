@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import TestForm from "@/components/TestForm";
 import { Test } from "@/models/TestModel";
 
-const page = () => {
+const CreateTestPage = () => {
   const [error, setError] = useState<string>("");
   const initialState: Test = {
     patientName: "",
@@ -40,4 +40,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default CreateTestPage;

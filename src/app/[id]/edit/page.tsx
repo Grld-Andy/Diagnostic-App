@@ -10,7 +10,7 @@ import { useParams } from "next/navigation";
 import axios from "axios";
 import Spinner from "@/components/Spinner";
 
-const page = () => {
+const EditTaskPage = () => {
   const [error, setError] = useState<string>("");
   const [test, setTest] = useState<Test | null>(null);
   const { id } = useParams();
@@ -29,7 +29,7 @@ const page = () => {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <Card>
@@ -63,4 +63,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default EditTaskPage;

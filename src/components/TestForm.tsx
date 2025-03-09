@@ -48,7 +48,7 @@ const TestForm: React.FC<Props> = ({
         await axios.put(apiRoute, data);
       }
       router.push(redirectRoute);
-    } catch (error) {
+    } catch (_error) {
       setIsSubmitting(false);
       setError("An unexpected error occured.");
     }

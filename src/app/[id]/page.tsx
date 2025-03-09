@@ -10,7 +10,7 @@ import TestDetails from "@/components/TestDetails";
 import Link from "next/link";
 import { Callout } from "@radix-ui/themes";
 
-const page = () => {
+const TestDetailsPage = () => {
   const [test, setTest] = useState<Test | null>(null);
   const router = useRouter();
   let { id } = useParams();
@@ -27,7 +27,7 @@ const page = () => {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   const handleDelete = async (id: string) => {
     const confirmDelete = confirm('Are you sure you want to delete this test?')
@@ -86,4 +86,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default TestDetailsPage;
