@@ -8,7 +8,7 @@ const Navbar = () => {
         <h1 className="text-2xl">Dashboard</h1>
       </Link>
       <div className="w-10 h-10 grid place-items-center">
-        <Image src="next.svg" width={40} height={40} alt="Profile pic" />
+        <Image src="/next.svg" width={40} height={40} alt="Profile pic" />
       </div>
     </nav>
   );
