@@ -13,6 +13,7 @@ interface Props {
   buttonText: string;
   initialState: Test;
   apiMethod: "post" | "put";
+  redirectRoute: string
 }
 
 const TestForm: React.FC<Props> = ({
@@ -21,6 +22,7 @@ const TestForm: React.FC<Props> = ({
   buttonText,
   initialState,
   apiMethod,
+  redirectRoute
 }) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -41,7 +43,7 @@ const TestForm: React.FC<Props> = ({
       } else if (apiMethod == "put") {
         await axios.put(apiRoute, data);
       }
-      router.push("/");
+      router.push(redirectRoute);
     } catch (error) {
       setIsSubmitting(false);
       setError("An unexpected error occured.");

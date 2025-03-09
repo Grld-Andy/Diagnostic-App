@@ -6,21 +6,21 @@ import { TbReportMedical } from "react-icons/tb";
 import React, { useEffect, useState } from "react";
 import { Test } from "@/models/TestModel";
 import TestForm from "@/components/TestForm";
-import { useRouter, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import axios from "axios";
 import Spinner from "@/components/Spinner";
 
 const page = () => {
   const [error, setError] = useState<string>("");
   const [test, setTest] = useState<Test | null>(null);
-  const router = useRouter();
-  const { id } = router.query;
+  const { id } = useParams();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(`/api/tests/${id}`);
-      const currentTest = response.data.data();
+      const currentTest = response.data.data;
+      currentTest.testDate = new Date(currentTest.testDate);
       setTest(currentTest);
       setIsLoading(false);
     };
@@ -45,8 +45,9 @@ const page = () => {
           setError={setError}
           apiRoute={"/api/tests"}
           buttonText={"Create Test"}
-          apiMethod={'put'}
+          apiMethod={"put"}
           initialState={test}
+          redirectRoute={`/${id}`}
         />
       ) : isLoading ? (
         <div className="w-full flex justify-center items-center">

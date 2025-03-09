@@ -25,7 +25,7 @@ const TestDetails: React.FC<Props> = ({ test }) => {
         </div>
         <div className="flex flex-col gap-1">
           <h2 className="font-semibold text-[18px] text-gray-800">Test Date</h2>
-          <p>{test.testDate}</p>
+          <p>{new Date(test.testDate).toDateString()}</p>
         </div>
         <div className="flex flex-col gap-1">
           <h2 className="font-semibold text-[18px] text-gray-800">Notes</h2>
