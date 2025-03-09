@@ -31,28 +31,31 @@ export default function Home() {
 
   return (
     <>
-      {tests.length > 0 ? (
-        <Card>
-          <div className="flex justify-between mb-5">
-            <div className="text-2xl flex items-center gap-2">
-              <h1>Tests List</h1>
-              <RiFileList3Line size={18} />
-            </div>
-            <Link href="/new">
-              <button className="bg-blue-700 px-3 py-2 cursor-pointer hover:bg-blue-500 active:shadow-md transition-colors text-white font-semibold rounded-md">
-                Add Test
-              </button>
-            </Link>
+      <Card>
+        <div className="flex justify-between mb-5">
+          <div className="text-2xl flex items-center gap-2">
+            <h1>Tests List</h1>
+            <RiFileList3Line size={18} />
           </div>
-          <TestTable tests={tests}/>
-        </Card>
-      ) : isLoading ? (
-        <div className="w-full flex justify-center items-center">
-          <Spinner />
+          <Link href="/new">
+            <button className="bg-blue-700 px-3 py-2 cursor-pointer hover:bg-blue-500 active:shadow-md transition-colors text-white font-semibold rounded-md">
+              Add Test
+            </button>
+          </Link>
         </div>
-      ) : (
-        <h1 className="text-[20px] font-medium text-gray-700">No test found</h1>
-      )}
+
+        {tests.length > 0 ? (
+          <TestTable tests={tests} setTests={setTests} />
+        ) : isLoading ? (
+          <div className="w-full flex justify-center items-center">
+            <Spinner />
+          </div>
+        ) : (
+          <h1 className="text-[20px] font-medium text-gray-700">
+            No test found
+          </h1>
+        )}
+      </Card>
     </>
   );
 }

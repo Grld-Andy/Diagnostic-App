@@ -5,7 +5,7 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const id = await params.id;
+  const { id } = await params;
   if (!id) {
     return NextResponse.json({ error: "ID is required" }, { status: 400 });
   }
@@ -22,7 +22,7 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const id = await params.id;
+  const { id } = await params;
   if (!id) {
     return NextResponse.json({ error: "ID is required" }, { status: 400 });
   }
@@ -47,12 +47,21 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const id = await params.id;
+  const { id } = await params;
+
   if (!id) {
     return NextResponse.json({ error: "ID is required" }, { status: 400 });
   }
-  await prisma.diagnosticTest.delete({
-    where: { id: Number(id) },
-  });
-  return NextResponse.json(null, { status: 204 });
+  try {
+    await prisma.diagnosticTest.delete({
+      where: { id: Number(id) },
+    });
+
+    return NextResponse.json({ message: "success" }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to delete test", details: error },
+      { status: 500 }
+    );
+  }
 }

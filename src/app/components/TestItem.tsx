@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { Test } from "../models/TestModel";
 import axios from "axios";
 import { Callout } from "@radix-ui/themes";
@@ -6,13 +6,16 @@ import { MdModeEditOutline, MdDeleteForever } from "react-icons/md";
 
 interface Props {
   test: Test;
+  setTests: Dispatch<SetStateAction<Array<Test>>>;
 }
 
-const TestItem: React.FC<Props> = ({ test }) => {
+const TestItem: React.FC<Props> = ({ test, setTests }) => {
   const [error, setError] = useState<string>("");
+
   const handleDelete = async (id: string) => {
     try {
       await axios.delete(`/api/tests/${id}`);
+      setTests((prev) => prev.filter((t) => t.id != id));
     } catch (err) {
       console.error(err);
       setError("There was an error deleting data");

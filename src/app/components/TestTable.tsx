@@ -1,13 +1,14 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import TestItem from "./TestItem";
 import { Test } from "../models/TestModel";
+import { motion } from "framer-motion";
 
 interface Props {
   tests: Array<Test>;
+  setTests: Dispatch<SetStateAction<Array<Test>>>;
 }
 
-const TestTable: React.FC<Props> = ({ tests }) => {
-
+const TestTable: React.FC<Props> = ({ tests, setTests }) => {
   return (
     <div>
       <div className="w-full border-1 border-black/50 rounded-md overflow-hidden">
@@ -34,11 +35,11 @@ const TestTable: React.FC<Props> = ({ tests }) => {
             <p>Actions</p>
           </div>
         </div>
-        <div className="divide-y divide-gray-300 bg-white">
+        <motion.div layout className="divide-y divide-gray-300 bg-white">
           {tests.map((test, index) => (
-            <TestItem key={index} test={test} />
+            <TestItem key={index} test={test} setTests={setTests} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
