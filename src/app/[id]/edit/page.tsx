@@ -6,7 +6,7 @@ import { TbReportMedical } from "react-icons/tb";
 import React, { useEffect, useState } from "react";
 import { Test } from "@/models/TestModel";
 import TestForm from "@/components/TestForm";
-import { useRouter } from "next/router";
+import { useRouter, useParams } from "next/navigation";
 import axios from "axios";
 import Spinner from "@/components/Spinner";
 

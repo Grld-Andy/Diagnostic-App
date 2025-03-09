@@ -3,7 +3,7 @@ import Card from "@/components/Card";
 import { RiFileList3Line } from "react-icons/ri";
 import { Test } from "@/models/TestModel";
 import axios from "axios";
-import { useRouter } from "next/router";
+import { useRouter, useParams } from "next/navigation";
 import Spinner from "@/components/Spinner";
 import TestDetails from "@/components/TestDetails";
 import Link from "next/link";
@@ -12,7 +12,7 @@ import { Callout } from "@radix-ui/themes";
 const page = () => {
   const [test, setTest] = useState<Test | null>(null);
   const router = useRouter();
-  let { id } = router.query;
+  let { id } = useParams();
   id = Array.isArray(id) ? id[0] : id || "";
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
