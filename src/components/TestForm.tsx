@@ -44,7 +44,6 @@ const TestForm: React.FC<Props> = ({
         await axios.post(apiRoute, data);
       } else if (apiMethod == "put") {
         data.testDate = new Date(data.testDate).toDateString();
-        console.log(data);
         await axios.put(apiRoute, data);
       }
       router.push(redirectRoute);

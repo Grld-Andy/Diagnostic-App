@@ -17,10 +17,8 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const res = await axios.get("/api/tests");
-        console.log(res.data);
         setTests(res.data.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      } catch (_error) {
       } finally {
         setIsLoading(false);
       }

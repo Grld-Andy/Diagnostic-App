@@ -35,8 +35,7 @@ const TestDetailsPage = () => {
     try {
       await axios.delete(`/api/tests/${id}`);
       router.push("/");
-    } catch (err) {
-      console.error(err);
+    } catch (_err) {
       setError("There was an error deleting data");
     }
   };

@@ -20,8 +20,7 @@ const TestItem: React.FC<Props> = ({ test, setTests }) => {
     try {
       await axios.delete(`/api/tests/${id}`);
       setTests((prev) => prev.filter((t) => t.id != id));
-    } catch (err) {
-      console.error(err);
+    } catch (_err) {
       setError("There was an error deleting data");
     }
   };

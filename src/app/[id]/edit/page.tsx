@@ -23,7 +23,6 @@ const EditTaskPage = () => {
       currentTest.testDate = new Date(currentTest.testDate)
         .toISOString()
         .split("T")[0];
-      console.log(currentTest);
       setTest(currentTest);
       setIsLoading(false);
     };
