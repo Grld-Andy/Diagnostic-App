@@ -15,6 +15,8 @@ const TestItem: React.FC<Props> = ({ test, setTests }) => {
   const [error, setError] = useState<string>("");
 
   const handleDelete = async (id: string) => {
+    const confirmDelete = confirm("Are you sure you want to delete this test?");
+    if (!confirmDelete) return;
     try {
       await axios.delete(`/api/tests/${id}`);
       setTests((prev) => prev.filter((t) => t.id != id));

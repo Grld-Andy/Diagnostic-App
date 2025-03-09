@@ -6,6 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createTestSchema } from "@/validators/testValidationSchema";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import classNames from "classnames";
+import Spinner from "./Spinner";
 
 interface Props {
   setError: React.Dispatch<React.SetStateAction<string>>;
@@ -13,7 +15,7 @@ interface Props {
   buttonText: string;
   initialState: Test;
   apiMethod: "post" | "put";
-  redirectRoute: string
+  redirectRoute: string;
 }
 
 const TestForm: React.FC<Props> = ({
@@ -22,7 +24,7 @@ const TestForm: React.FC<Props> = ({
   buttonText,
   initialState,
   apiMethod,
-  redirectRoute
+  redirectRoute,
 }) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -37,10 +39,12 @@ const TestForm: React.FC<Props> = ({
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmitting(true);
-      data.testDate = new Date().toDateString();
       if (apiMethod == "post") {
+        data.testDate = new Date().toDateString();
         await axios.post(apiRoute, data);
       } else if (apiMethod == "put") {
+        data.testDate = new Date(data.testDate).toDateString();
+        console.log(data);
         await axios.put(apiRoute, data);
       }
       router.push(redirectRoute);
@@ -144,9 +148,18 @@ const TestForm: React.FC<Props> = ({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="bg-blue-800 w-full px-3 py-2 cursor-pointer hover:bg-blue-500 active:shadow-md transition-colors text-white font-semibold rounded-md"
+          className={classNames(
+            "bg-blue-800 w-full px-3 py-2 cursor-pointer hover:bg-blue-500 active:shadow-md transition-colors text-white font-semibold rounded-md",
+            { "user-select-none opacity-50": isSubmitting }
+          )}
         >
-          {buttonText}
+          {isSubmitting ? (
+            <div className="w-full flex justify-center">
+              <Spinner text="Submitting..." />
+            </div>
+          ) : (
+            <p>{buttonText}</p>
+          )}
         </button>
       </div>
     </form>

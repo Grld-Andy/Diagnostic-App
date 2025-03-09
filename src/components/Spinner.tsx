@@ -1,6 +1,10 @@
 import React from "react";
 
-const Spinner = () => {
+interface Props{
+  text?: string
+}
+
+const Spinner: React.FC<Props> = ({text="Loading..."}) => {
   return (
     <div className="flex gap-2 items-center">
     <div

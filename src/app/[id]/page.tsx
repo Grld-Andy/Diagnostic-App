@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import Card from "@/components/Card";
-import { RiFileList3Line } from "react-icons/ri";
 import { Test } from "@/models/TestModel";
 import axios from "axios";
 import { useRouter, useParams } from "next/navigation";
@@ -22,7 +21,7 @@ const page = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(`/api/tests/${id}`);
-      const currentTest = response.data.data();
+      const currentTest = response.data.data;
       setTest(currentTest);
       setIsLoading(false);
     };
@@ -31,6 +30,8 @@ const page = () => {
   }, []);
 
   const handleDelete = async (id: string) => {
+    const confirmDelete = confirm('Are you sure you want to delete this test?')
+    if(!confirmDelete)return
     try {
       await axios.delete(`/api/tests/${id}`);
       router.push("/");
@@ -54,9 +55,8 @@ const page = () => {
       <div className="flex justify-between mb-5">
         <div className="text-2xl flex items-center gap-2">
           <h1>Test #{id}</h1>
-          <RiFileList3Line size={18} />
         </div>
-        <div>
+        <div className="flex gap-2">
           <Link href={`/${id}/edit`}>
             <button className="bg-yellow-500 px-3 py-2 cursor-pointer hover:bg-yellow-400 active:shadow-md transition-colors text-white font-semibold rounded-md">
               Edit

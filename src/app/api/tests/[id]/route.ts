@@ -33,7 +33,7 @@ export async function PUT(
       patientName: body.patientName,
       testType: body.testType,
       result: body.result,
-      testDate: body.testDate,
+      testDate: new Date(body.testDate),
       notes: body.notes,
     },
   });

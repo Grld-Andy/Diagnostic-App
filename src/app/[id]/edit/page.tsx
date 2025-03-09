@@ -2,7 +2,7 @@
 
 import Card from "@/components/Card";
 import { Callout } from "@radix-ui/themes";
-import { TbReportMedical } from "react-icons/tb";
+import { RiFileEditLine } from "react-icons/ri";
 import React, { useEffect, useState } from "react";
 import { Test } from "@/models/TestModel";
 import TestForm from "@/components/TestForm";
@@ -20,7 +20,10 @@ const page = () => {
     const fetchData = async () => {
       const response = await axios.get(`/api/tests/${id}`);
       const currentTest = response.data.data;
-      currentTest.testDate = new Date(currentTest.testDate);
+      currentTest.testDate = new Date(currentTest.testDate)
+        .toISOString()
+        .split("T")[0];
+      console.log(currentTest);
       setTest(currentTest);
       setIsLoading(false);
     };
@@ -32,7 +35,7 @@ const page = () => {
     <Card>
       <div className="text-2xl flex items-center gap-2 mb-5">
         <h1>Edit Test</h1>
-        <TbReportMedical size={18} />
+        <RiFileEditLine size={18} />
       </div>
       {error && (
         <Callout.Root color="red" className="mb-5">
@@ -43,7 +46,7 @@ const page = () => {
       {test ? (
         <TestForm
           setError={setError}
-          apiRoute={"/api/tests"}
+          apiRoute={`/api/tests/${id}`}
           buttonText={"Update Test"}
           apiMethod={"put"}
           initialState={test}
