@@ -44,7 +44,7 @@ const page = () => {
         <TestForm
           setError={setError}
           apiRoute={"/api/tests"}
-          buttonText={"Create Test"}
+          buttonText={"Update Test"}
           apiMethod={"put"}
           initialState={test}
           redirectRoute={`/${id}`}
