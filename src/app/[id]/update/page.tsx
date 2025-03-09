@@ -1,14 +1,17 @@
+"use client";
+
+import Card from "@/app/components/Card";
+import { Callout } from "@radix-ui/themes";
+import { TbReportMedical } from "react-icons/tb";
 import React, { useEffect, useState } from "react";
-import Card from "../components/Card";
-import { RiFileList3Line } from "react-icons/ri";
-import { Test } from "../models/TestModel";
-import axios from "axios";
+import { Test } from "@/app/models/TestModel";
+import TestForm from "@/app/components/TestForm";
 import { useRouter } from "next/router";
-import Spinner from "../components/Spinner";
-import TestDetails from "../components/TestDetails";
-import Link from "next/link";
+import axios from "axios";
+import Spinner from "@/app/components/Spinner";
 
 const page = () => {
+  const [error, setError] = useState<string>("");
   const [test, setTest] = useState<Test | null>(null);
   const router = useRouter();
   const { id } = router.query;
@@ -27,22 +30,23 @@ const page = () => {
 
   return (
     <Card>
-      <div className="flex justify-between mb-5">
-        <div className="text-2xl flex items-center gap-2">
-          <h1>Tests List</h1>
-          <RiFileList3Line size={18} />
-        </div>
-        <div>
-          <Link href="/new">
-            <button className="bg-blue-700 px-3 py-2 cursor-pointer hover:bg-blue-500 active:shadow-md transition-colors text-white font-semibold rounded-md">
-              Edit Test
-            </button>
-          </Link>
-        </div>
+      <div className="text-2xl flex items-center gap-2 mb-5">
+        <h1>Edit Test</h1>
+        <TbReportMedical size={18} />
       </div>
+      {error && (
+        <Callout.Root color="red" className="mb-5">
+          <Callout.Text>{error}</Callout.Text>
+        </Callout.Root>
+      )}
 
       {test ? (
-        <TestDetails test={test} />
+        <TestForm
+          setError={setError}
+          apiRoute={"/api/tests"}
+          buttonText={"Create Test"}
+          initialState={test}
+        />
       ) : isLoading ? (
         <div className="w-full flex justify-center items-center">
           <Spinner />

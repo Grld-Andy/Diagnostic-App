@@ -52,7 +52,7 @@ export default function Home() {
           </div>
         ) : (
           <h1 className="text-[20px] font-medium text-gray-700">
-            No test found
+            Test not found
           </h1>
         )}
       </Card>
