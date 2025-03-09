@@ -1,11 +1,11 @@
 "use client";
 
-import Card from "@/app/components/Card";
+import Card from "@/components/Card";
 import { Callout } from "@radix-ui/themes";
 import { TbReportMedical } from "react-icons/tb";
 import React, { useState } from "react";
-import TestForm from "@/app/components/TestForm";
-import { Test } from "@/app/models/TestModel";
+import TestForm from "@/components/TestForm";
+import { Test } from "@/models/TestModel";
 
 const page = () => {
   const [error, setError] = useState<string>("");
@@ -31,6 +31,7 @@ const page = () => {
       <TestForm
         setError={setError}
         apiRoute={"/api/tests"}
+        apiMethod={'post'}
         buttonText={"Create Test"}
         initialState={initialState}
       />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Test } from "../models/TestModel";
+import { Test } from "@/models/TestModel";
 
 interface Props {
   test: Test;

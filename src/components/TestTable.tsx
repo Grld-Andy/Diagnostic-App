@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import TestItem from "./TestItem";
-import { Test } from "../models/TestModel";
+import { Test } from "@/models/TestModel";
 import { motion } from "framer-motion";
 
 interface Props {

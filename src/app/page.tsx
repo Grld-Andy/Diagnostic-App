@@ -2,12 +2,12 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Test } from "./models/TestModel";
+import { Test } from "@/models/TestModel";
 import { RiFileList3Line } from "react-icons/ri";
-import TestTable from "./components/TestTable";
-import Spinner from "./components/Spinner";
+import TestTable from "@/components/TestTable";
+import Spinner from "@/components/Spinner";
 import Link from "next/link";
-import Card from "@/app/components/Card";
+import Card from "@/components/Card";
 
 export default function Home() {
   const [tests, setTests] = useState<Array<Test>>([]);

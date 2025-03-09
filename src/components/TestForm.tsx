@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import ErrorMessage from "./ErrorMessage";
 import { useForm } from "react-hook-form";
-import { Test } from "../models/TestModel";
+import { Test } from "@/models/TestModel";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createTestSchema } from "../validators/testValidationSchema";
+import { createTestSchema } from "@/validators/testValidationSchema";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
@@ -12,6 +12,7 @@ interface Props {
   apiRoute: string;
   buttonText: string;
   initialState: Test;
+  apiMethod: "post" | "put";
 }
 
 const TestForm: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const TestForm: React.FC<Props> = ({
   apiRoute,
   buttonText,
   initialState,
+  apiMethod,
 }) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -34,7 +36,11 @@ const TestForm: React.FC<Props> = ({
     try {
       setIsSubmitting(true);
       data.testDate = new Date().toDateString();
-      await axios.post(apiRoute, data);
+      if (apiMethod == "post") {
+        await axios.post(apiRoute, data);
+      } else if (apiMethod == "put") {
+        await axios.put(apiRoute, data);
+      }
       router.push("/");
     } catch (error) {
       setIsSubmitting(false);

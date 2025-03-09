@@ -1,8 +1,9 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { Test } from "../models/TestModel";
+import { Test } from "@/models/TestModel";
 import axios from "axios";
 import { Callout } from "@radix-ui/themes";
 import { MdModeEditOutline, MdDeleteForever } from "react-icons/md";
+import Link from "next/link";
 
 interface Props {
   test: Test;
@@ -40,9 +41,11 @@ const TestItem: React.FC<Props> = ({ test, setTests }) => {
       </div>
       <div className="col-span-1 p-2">{test.notes}</div>
       <div className="col-span-1 p-2 flex justify-center gap-2 text-white">
-        <button className="px-2 py-2 rounded-md bg-yellow-500 active:shadow-md transition-colors hover:bg-yellow-400 cursor-pointer">
-          <MdModeEditOutline size={20} />
-        </button>
+        <Link href={`/${test.id}/edit`}>
+          <button className="px-2 py-2 rounded-md bg-yellow-500 active:shadow-md transition-colors hover:bg-yellow-400 cursor-pointer">
+            <MdModeEditOutline size={20} />
+          </button>
+        </Link>
         <button
           onClick={() => {
             handleDelete(test.id!);

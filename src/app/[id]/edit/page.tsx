@@ -1,14 +1,14 @@
 "use client";
 
-import Card from "@/app/components/Card";
+import Card from "@/components/Card";
 import { Callout } from "@radix-ui/themes";
 import { TbReportMedical } from "react-icons/tb";
 import React, { useEffect, useState } from "react";
-import { Test } from "@/app/models/TestModel";
-import TestForm from "@/app/components/TestForm";
+import { Test } from "@/models/TestModel";
+import TestForm from "@/components/TestForm";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Spinner from "@/app/components/Spinner";
+import Spinner from "@/components/Spinner";
 
 const page = () => {
   const [error, setError] = useState<string>("");
@@ -45,6 +45,7 @@ const page = () => {
           setError={setError}
           apiRoute={"/api/tests"}
           buttonText={"Create Test"}
+          apiMethod={'put'}
           initialState={test}
         />
       ) : isLoading ? (

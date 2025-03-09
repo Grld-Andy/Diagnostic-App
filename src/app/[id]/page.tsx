@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Card from "../components/Card";
+import Card from "@/components/Card";
 import { RiFileList3Line } from "react-icons/ri";
-import { Test } from "../models/TestModel";
+import { Test } from "@/models/TestModel";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Spinner from "../components/Spinner";
-import TestDetails from "../components/TestDetails";
+import Spinner from "@/components/Spinner";
+import TestDetails from "@/components/TestDetails";
 import Link from "next/link";
 import { Callout } from "@radix-ui/themes";
 
@@ -55,8 +55,8 @@ const page = () => {
           <RiFileList3Line size={18} />
         </div>
         <div>
-          <Link href="/new">
-            <button className="bg-yellow-700 px-3 py-2 cursor-pointer hover:bg-yellow-500 active:shadow-md transition-colors text-white font-semibold rounded-md">
+          <Link href={`/${id}/edit`}>
+            <button className="bg-yellow-500 px-3 py-2 cursor-pointer hover:bg-yellow-400 active:shadow-md transition-colors text-white font-semibold rounded-md">
               Edit
             </button>
           </Link>
@@ -64,7 +64,7 @@ const page = () => {
             onClick={() => {
               handleDelete(id);
             }}
-            className="bg-red-700 px-3 py-2 cursor-pointer hover:bg-red-500 active:shadow-md transition-colors text-white font-semibold rounded-md"
+            className="bg-red-500 px-3 py-2 cursor-pointer hover:bg-red-400 active:shadow-md transition-colors text-white font-semibold rounded-md"
           >
             Delete
           </button>
