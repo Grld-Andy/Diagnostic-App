@@ -1,31 +1,27 @@
-# Diagnostic Test Results Management - Documentation
+# Diagnostic Test Results Management  
 
-## Project Overview
+## Overview  
 
-This project is a simple CRUD application designed to help medical laboratories efficiently manage diagnostic test results. It is built using **Next.js**, **TypeScript**, **Prisma ORM**, and **PostgreSQL**.
+This is a simple yet powerful CRUD application designed to help medical labs manage diagnostic test results efficiently. Built with Next.js, TypeScript, Prisma ORM, and PostgreSQL, it offers a smooth and secure way to store, retrieve, update, and delete test results.  
 
-## Features
+## Key Features  
 
-- Create, Read, Update, and Delete (CRUD) diagnostic test results.
-- API endpoints to manage test results.
-- Frontend UI to interact with the data.
-- Validation using **Zod**.
-- Styled with **Tailwind CSS**.
-- **Authentication and Authorization** using NextAuth.js.
+- Full CRUD functionality for managing test results  
+- API endpoints for backend operations  
+- User-friendly interface built with Next.js and Tailwind CSS  
+- Input validation with Zod  
+- Database hosted on Supabase  
 
-## Technologies Used
+## Tech Stack  
 
-- **Next.js (App Router)**
-- **TypeScript**
-- **Prisma ORM**
-- **PostgreSQL**
-- **Zod (Validation)**
-- **NextAuth.js (Authentication & Authorization)**
-- **React & Tailwind CSS**
+- Next.js (App Router)  
+- TypeScript  
+- Prisma ORM  
+- PostgreSQL (Supabase)  
+- Zod for input validation  
+- React and Tailwind CSS for styling  
 
----
-
-## Project Structure
+## Project Structure  
 
 ```
 ├───app
@@ -42,10 +38,10 @@ This project is a simple CRUD application designed to help medical laboratories 
 └───middleware.ts
 ```
 
-### **Main Directory Files**
+### Important Files  
 
 ```
-.nex
+.next
 node_modules
 prisma
 public
@@ -62,72 +58,112 @@ README.md
 tsconfig.json
 ```
 
----
+## Installation & Setup  
 
-## Installation & Setup
-
-### **1. Clone the Repository**
+### Clone the Repository  
 
 ```sh
-git clone <repository_url>
-cd <project_directory>
+git clone https://github.com/Grld-Andy/Diagnostic-App.git
 ```
 
-### **2. Install Dependencies**
+### Install Dependencies  
 
 ```sh
 npm install
 ```
 
-### **3. Configure Environment Variables**
+### Set Up Environment Variables  
 
-Create a `.env` file in the root directory and add the following:
+Create a `.env` file in the project root and add the necessary credentials for Supabase and authentication:  
 
 ```
-DATABASE_URL=postgresql://<user>:<password>@<host>:<port>/<database>
-NEXTAUTH_SECRET=<your-secret>
-NEXTAUTH_URL=http://localhost:3000
-GITHUB_ID=<your-github-client-id>
-GITHUB_SECRET=<your-github-client-secret>
+DATABASE_URL=""
+DIRECT_URL=""
+NODE_ENV=""
 ```
 
-### **4. Setup the Database**
+These values can be found in the Supabase dashboard.  
+
+### Apply Database Migrations  
 
 ```sh
 npx prisma migrate dev --name init
 ```
 
-### **5. Run the Development Server**
+If you need to push schema changes:  
+
+```sh
+npx prisma db push
+```
+
+### Start the Development Server  
 
 ```sh
 npm run dev
 ```
 
----
+The application will be available at `http://localhost:3000`.  
 
-## API Endpoints
+## API Endpoints  
 
-### **1. Create a Diagnostic Test Result**
+### Create a Test Result  
 
-`POST /api/tests`
+**POST** `/api/tests`  
 
-- **Body:**
-  ```json
-  {
-    "patientName": "John Doe",
-    "testType": "Blood Test",
-    "result": "Positive",
-    "testDate": "2025-03-09",
-    "notes": "Urgent case"
-  }
-  ```
+**Body:**  
+```json
+{
+  "patientName": "John Doe",
+  "testType": "Blood Test",
+  "result": "Positive",
+  "testDate": "2025-03-09",
+  "notes": "Urgent case"
+}
+```
 
-### **2. Get a Test Result by ID**
+### Get a Test Result by ID  
 
-`GET /api/tests/:id`
+**GET** `/api/tests/:id`  
 
-- **Response:**
-  ```json
+**Response:**  
+```json
+{
+  "id": 1,
+  "patientName": "John Doe",
+  "testType": "Blood Test",
+  "result": "Positive",
+  "testDate": "2025-03-09",
+  "notes": "Urgent case"
+}
+```
+
+### Update a Test Result  
+
+**PUT** `/api/tests/:id`  
+
+**Body:**  
+```json
+{
+  "id": 1,
+  "patientName": "John Doe",
+  "testType": "Blood Test",
+  "result": "Negative",
+  "testDate": "2025-03-09",
+  "notes": "Urgent result"
+}
+```
+
+### Delete a Test Result  
+
+**DELETE** `/api/tests/:id`  
+
+### List All Test Results  
+
+**GET** `/api/tests`  
+
+**Response:**  
+```json
+[
   {
     "id": 1,
     "patientName": "John Doe",
@@ -136,64 +172,20 @@ npm run dev
     "testDate": "2025-03-09",
     "notes": "Urgent case"
   }
-  ```
+]
+```
 
-### **3. Update a Test Result**
+## Frontend Pages  
 
-`PUT /api/tests/:id`
+- Adding a new test result: `app/new/page.tsx`  
+- Editing an existing test result: `app/[id]/edit/page.tsx`  
+- Viewing a test result: `app/[id]/page.tsx`  
 
-- **Body:**
-  ```json
-  {
-    "result": "Negative",
-    "notes": "Updated result"
-  }
-  ```
+## Data Validation  
 
-### **4. Delete a Test Result**
+Zod is used to ensure data integrity before it is stored in the database.  
 
-`DELETE /api/tests/:id`
-
-### **5. List All Test Results**
-
-`GET /api/tests`
-
-- **Response:**
-  ```json
-  [
-    {
-      "id": 1,
-      "patientName": "John Doe",
-      "testType": "Blood Test",
-      "result": "Positive",
-      "testDate": "2025-03-09",
-      "notes": "Urgent case"
-    }
-  ]
-  ```
-
----
-
-## Frontend Implementation
-
-### **Adding a New Test Result**
-
-Located in `app/new/page.tsx`, this page contains a form to submit test results.
-
-### **Editing an Existing Test Result**
-
-Located in `app/[id]/edit/page.tsx`, this page allows updating test details.
-
-### **Viewing Test Results**
-
-Located in `app/[id]/page.tsx`, this page displays test details.
-
----
-
-## Validation
-
-We use **Zod** for input validation to ensure correct data structure.
-Example schema in `validators/testSchema.ts`:
+Example schema in `validators/testSchema.ts`:  
 
 ```ts
 import { z } from "zod";
@@ -205,31 +197,10 @@ export const testSchema = z.object({
   testDate: z.string().refine((date) => !isNaN(Date.parse(date)), {
     message: "Invalid date format",
   }),
-  notes: z
-    .string()
-    .optional()
-    .max(200, "Notes should not exceed 200 characters"),
+  notes: z.string().optional().max(200, "Notes should not exceed 200 characters"),
 });
 ```
 
----
+## Conclusion  
 
-## Notes
-
-- Uses **Next.js App Router** structure.
-- Follows **best practices** for API and frontend development.
-- Uses **Prisma ORM** for database interactions.
-
-### **Future Improvements**
-
-- Add **role-based access control (RBAC)** for different user roles.
-- Implement **pagination** for large datasets.
-- Enhance **UI/UX** with more interactivity.
-
----
-
-## Conclusion
-
-This project provides a structured approach to managing diagnostic test results efficiently. It follows best practices in Next.js development and ensures data integrity using Prisma ORM and Zod validation.
-
-For any issues or contributions, feel free to create a pull request or open an issue in the repository.
+This project provides a structured and efficient approach to managing diagnostic test results. By using Next.js, Prisma, and Supabase, it ensures secure data storage, validation, and authentication.

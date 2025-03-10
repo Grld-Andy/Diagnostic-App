@@ -3,7 +3,7 @@ CREATE TABLE "DiagnosticTest" (
     "id" SERIAL NOT NULL,
     "patientName" VARCHAR(255) NOT NULL,
     "testType" VARCHAR(255) NOT NULL,
-    "result" BOOLEAN NOT NULL,
+    "result" TEXT NOT NULL,
     "testDate" DATE NOT NULL,
     "notes" TEXT NOT NULL,
 
