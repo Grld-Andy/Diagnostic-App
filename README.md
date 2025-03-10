@@ -1,27 +1,27 @@
-# Diagnostic Test Results Management  
+# Diagnostic Test Results Management
 
-## Overview  
+## Overview
 
-This is a simple yet powerful CRUD application designed to help medical labs manage diagnostic test results efficiently. Built with Next.js, TypeScript, Prisma ORM, and PostgreSQL, it offers a smooth and secure way to store, retrieve, update, and delete test results.  
+This is a simple yet powerful CRUD application designed to help medical labs manage diagnostic test results efficiently. Built with Next.js, TypeScript, Prisma ORM, and PostgreSQL, it offers a smooth and secure way to store, retrieve, update, and delete test results.
 
-## Key Features  
+## Key Features
 
-- Full CRUD functionality for managing test results  
-- API endpoints for backend operations  
-- User-friendly interface built with Next.js and Tailwind CSS  
-- Input validation with Zod  
-- Database hosted on Supabase  
+- Full CRUD functionality for managing test results
+- API endpoints for backend operations
+- User-friendly interface built with Next.js and Tailwind CSS
+- Input validation with Zod
+- Database hosted on Supabase
 
-## Tech Stack  
+## Tech Stack
 
-- Next.js (App Router)  
-- TypeScript  
-- Prisma ORM  
-- PostgreSQL (Supabase)  
-- Zod for input validation  
-- React and Tailwind CSS for styling  
+- Next.js (App Router)
+- TypeScript
+- Prisma ORM
+- PostgreSQL (Supabase)
+- Zod for input validation
+- React and Tailwind CSS for styling
 
-## Project Structure  
+## Project Structure
 
 ```
 ├───app
@@ -38,7 +38,7 @@ This is a simple yet powerful CRUD application designed to help medical labs man
 └───middleware.ts
 ```
 
-### Important Files  
+### Important Files
 
 ```
 .next
@@ -58,23 +58,23 @@ README.md
 tsconfig.json
 ```
 
-## Installation & Setup  
+## Installation & Setup
 
-### Clone the Repository  
+### Clone the Repository
 
 ```sh
 git clone https://github.com/Grld-Andy/Diagnostic-App.git
 ```
 
-### Install Dependencies  
+### Install Dependencies
 
 ```sh
 npm install
 ```
 
-### Set Up Environment Variables  
+### Set Up Environment Variables
 
-Create a `.env` file in the project root and add the necessary credentials for Supabase and authentication:  
+Create a `.env` file in the project root and add the necessary credentials for Supabase and authentication:
 
 ```
 DATABASE_URL=""
@@ -82,35 +82,36 @@ DIRECT_URL=""
 NODE_ENV=""
 ```
 
-These values can be found in the Supabase dashboard.  
+These values can be found in the Supabase dashboard.
 
-### Apply Database Migrations  
+### Apply Database Migrations
 
 ```sh
 npx prisma migrate dev --name init
 ```
 
-If you need to push schema changes:  
+If you need to push schema changes:
 
 ```sh
 npx prisma db push
 ```
 
-### Start the Development Server  
+### Start the Development Server
 
 ```sh
 npm run dev
 ```
 
-The application will be available at `http://localhost:3000`.  
+The application will be available at `http://localhost:3000`.
 
-## API Endpoints  
+## API Endpoints
 
-### Create a Test Result  
+### Create a Test Result
 
-**POST** `/api/tests`  
+**POST** `/api/tests`
 
-**Body:**  
+**Body:**
+
 ```json
 {
   "patientName": "John Doe",
@@ -121,11 +122,12 @@ The application will be available at `http://localhost:3000`.
 }
 ```
 
-### Get a Test Result by ID  
+### Get a Test Result by ID
 
-**GET** `/api/tests/:id`  
+**GET** `/api/tests/:id`
 
-**Response:**  
+**Response:**
+
 ```json
 {
   "id": 1,
@@ -137,11 +139,12 @@ The application will be available at `http://localhost:3000`.
 }
 ```
 
-### Update a Test Result  
+### Update a Test Result
 
-**PUT** `/api/tests/:id`  
+**PUT** `/api/tests/:id`
 
-**Body:**  
+**Body:**
+
 ```json
 {
   "id": 1,
@@ -153,15 +156,16 @@ The application will be available at `http://localhost:3000`.
 }
 ```
 
-### Delete a Test Result  
+### Delete a Test Result
 
-**DELETE** `/api/tests/:id`  
+**DELETE** `/api/tests/:id`
 
-### List All Test Results  
+### List All Test Results
 
-**GET** `/api/tests`  
+**GET** `/api/tests`
 
-**Response:**  
+**Response:**
+
 ```json
 [
   {
@@ -175,17 +179,17 @@ The application will be available at `http://localhost:3000`.
 ]
 ```
 
-## Frontend Pages  
+## Frontend Pages Routes
 
-- Adding a new test result: `app/new/page.tsx`  
-- Editing an existing test result: `app/[id]/edit/page.tsx`  
-- Viewing a test result: `app/[id]/page.tsx`  
+- Adding a new test result: `/new`
+- Editing an existing test result: `/[id]/edit`
+- Viewing a test result: `/[id]`
 
-## Data Validation  
+## Data Validation
 
-Zod is used to ensure data integrity before it is stored in the database.  
+Zod is used to ensure data integrity before it is stored in the database.
 
-Example schema in `validators/testSchema.ts`:  
+Example schema in `validators/testSchema.ts`:
 
 ```ts
 import { z } from "zod";
@@ -197,10 +201,13 @@ export const testSchema = z.object({
   testDate: z.string().refine((date) => !isNaN(Date.parse(date)), {
     message: "Invalid date format",
   }),
-  notes: z.string().optional().max(200, "Notes should not exceed 200 characters"),
+  notes: z
+    .string()
+    .optional()
+    .max(200, "Notes should not exceed 200 characters"),
 });
 ```
 
-## Conclusion  
+## Conclusion
 
 This project provides a structured and efficient approach to managing diagnostic test results. By using Next.js, Prisma, and Supabase, it ensures secure data storage, validation, and authentication.
